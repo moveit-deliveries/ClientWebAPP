@@ -1,10 +1,24 @@
+import os
+
 from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return render_template('index.html')
 
-if __name__ == '__main__':
-    app.run()
+def static_folder() -> str:
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../static')
+
+
+def template_folder() -> str:
+    return os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../templates')
+
+
+def create_app(config):
+    app: Flask = Flask(__name__)
+
+    app.template_folder = template_folder()
+    app.static_folder = static_folder()
+
+    app.config['SECRET_KEY'] = config.SECRET_KEY
+
+    return app
