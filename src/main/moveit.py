@@ -1,13 +1,13 @@
-import os
-
 from flask import Flask
 
 
 def static_folder() -> str:
+    import os
     return os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../static')
 
 
 def template_folder() -> str:
+    import os
     return os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../templates')
 
 
